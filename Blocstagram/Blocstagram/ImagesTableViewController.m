@@ -44,6 +44,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIImage *image = self.images[indexPath.row];
+    return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
