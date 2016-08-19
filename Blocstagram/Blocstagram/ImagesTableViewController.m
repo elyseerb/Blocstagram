@@ -70,7 +70,7 @@
     UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:imageViewTag];
     
     // #3
-    if (!imageViewTag) {
+    if (!imageView) {
         //This is a new cell, it doesn't have an image yet
         imageView = [[UIImageView alloc] init];
         imageView.contentMode = UIViewContentModeScaleToFill;
