@@ -29,6 +29,7 @@
 		08FCB7AD1D679467007D4978 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7AC1D679466007D4978 /* Media.m */; };
 		08FCB7B01D6798C2007D4978 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7AF1D6798C2007D4978 /* Comment.m */; };
 		08FCB7B31D67ACF5007D4978 /* Datasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7B21D67ACF5007D4978 /* Datasource.m */; };
+		08FCB7B91D6C2009007D4978 /* items.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7B81D6C2009007D4978 /* items.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		08FCB7AF1D6798C2007D4978 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		08FCB7B11D67ACF5007D4978 /* Datasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datasource.h; sourceTree = "<group>"; };
 		08FCB7B21D67ACF5007D4978 /* Datasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datasource.m; sourceTree = "<group>"; };
+		08FCB7B71D6C2009007D4978 /* items.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = items.h; sourceTree = "<group>"; };
+		08FCB7B81D6C2009007D4978 /* items.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = items.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +156,8 @@
 				08FCB7AF1D6798C2007D4978 /* Comment.m */,
 				08FCB7B11D67ACF5007D4978 /* Datasource.h */,
 				08FCB7B21D67ACF5007D4978 /* Datasource.m */,
+				08FCB7B71D6C2009007D4978 /* items.h */,
+				08FCB7B81D6C2009007D4978 /* items.m */,
 			);
 			path = Blocstagram;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FCB7B91D6C2009007D4978 /* items.m in Sources */,
 				08FCB7B01D6798C2007D4978 /* Comment.m in Sources */,
 				08FCB7AD1D679467007D4978 /* Media.m in Sources */,
 				08FCB7B31D67ACF5007D4978 /* Datasource.m in Sources */,
