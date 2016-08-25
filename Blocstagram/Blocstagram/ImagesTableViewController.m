@@ -11,6 +11,7 @@
 #import "Media.h"
 #import "User.h"
 #import "Comment.h"
+#import "MediaTableViewCell.h"
 
 @interface ImagesTableViewController ()
 @end
@@ -30,7 +31,7 @@
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"imageCell"];
+    [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,9 +42,8 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Media *item = [Datasource sharedInstance].mediaItems[indexPath.row];
-    UIImage *image = item.image;
     
-    return image.size.height / image.size.width * CGRectGetWidth(self.view.frame);
+    return [MediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
 }
 
 #pragma mark - Table view data source
@@ -55,31 +55,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // #1
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    // #2
-    
-    static NSInteger imageViewTag = 1234;
-    UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:imageViewTag];
-    
-    // #3
-    if (!imageView) {
-        //This is a new cell, it doesn't have an image yet
-        imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleToFill;
-        
-        imageView.frame = cell.contentView.bounds;
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        
-        imageView.tag = imageViewTag;
-        [cell.contentView addSubview:imageView];
-    }
-    
-    Media *item = [Datasource sharedInstance].mediaItems[indexPath.row];
-    imageView.image = item.image;
+    MediaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
+    cell.mediaItem = [Datasource sharedInstance].mediaItems[indexPath.row];
     
     return cell;
 }

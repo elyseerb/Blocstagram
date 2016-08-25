@@ -29,6 +29,7 @@
 		08FCB7AD1D679467007D4978 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7AC1D679466007D4978 /* Media.m */; };
 		08FCB7B01D6798C2007D4978 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7AF1D6798C2007D4978 /* Comment.m */; };
 		08FCB7B31D67ACF5007D4978 /* Datasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7B21D67ACF5007D4978 /* Datasource.m */; };
+		08FCB7BC1D6D2565007D4978 /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB7BB1D6D2565007D4978 /* MediaTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		08FCB7AF1D6798C2007D4978 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		08FCB7B11D67ACF5007D4978 /* Datasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datasource.h; sourceTree = "<group>"; };
 		08FCB7B21D67ACF5007D4978 /* Datasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datasource.m; sourceTree = "<group>"; };
+		08FCB7BA1D6D2565007D4978 /* MediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaTableViewCell.h; path = ../MediaTableViewCell.h; sourceTree = "<group>"; };
+		08FCB7BB1D6D2565007D4978 /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				0878A6DB1D664D9700464362 /* Images */,
+				08FCB7BA1D6D2565007D4978 /* MediaTableViewCell.h */,
+				08FCB7BB1D6D2565007D4978 /* MediaTableViewCell.m */,
 				0878A6F01D66529900464362 /* ImagesTableViewController.h */,
 				0878A6F11D66529900464362 /* ImagesTableViewController.m */,
 				0878A6AB1D664D2500464362 /* AppDelegate.h */,
@@ -341,6 +346,7 @@
 			files = (
 				08FCB7B01D6798C2007D4978 /* Comment.m in Sources */,
 				08FCB7AD1D679467007D4978 /* Media.m in Sources */,
+				08FCB7BC1D6D2565007D4978 /* MediaTableViewCell.m in Sources */,
 				08FCB7B31D67ACF5007D4978 /* Datasource.m in Sources */,
 				08FCB7AA1D678460007D4978 /* User.m in Sources */,
 				0878A6B01D664D2500464362 /* ViewController.m in Sources */,
