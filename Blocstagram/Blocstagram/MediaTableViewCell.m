@@ -88,6 +88,11 @@ static NSParagraphStyle *paragraphStyle;
     [mutableUsernameAndCaptionString addAttribute:NSFontAttributeName value:[boldFont fontWithSize:usernameFontSize] range:usernameRange];
     [mutableUsernameAndCaptionString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
     
+    // #5 Change kerning of the image caption
+    CGFloat otherNum = 20;
+    CFNumberRef otherCFNum = CFNumberCreate(NULL, kCFNumberCGFloatType, &otherNum);
+    //CFAttributedStringSetAttribute(attrString, CFRangeMake(0,18), kCTKernAttributeName, otherCFNum);
+
     
     return  mutableUsernameAndCaptionString;
 }
@@ -96,6 +101,8 @@ static NSParagraphStyle *paragraphStyle;
     NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] init];
     
     for (Comment *comment in self.mediaItem.comments) {
+        NSUInteger index = [self.mediaItem.comments indexOfObject:comment];
+
         //Make a string that says "username comment" followed by a line break
         NSString *baseString = [NSString stringWithFormat:@"%@ %@/n", comment.from.userName, comment.text];
         
@@ -105,6 +112,12 @@ static NSParagraphStyle *paragraphStyle;
         NSRange usernameRange = [baseString rangeOfString:comment.from.userName];
         [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
         [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
+        
+        if (index == 0) {
+            // First comment only
+            NSRange commentRange = [baseString rangeOfString:comment.text];
+            [oneCommentString addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:commentRange];
+        }
         
         [commentString appendAttributedString:oneCommentString];
     }
