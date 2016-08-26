@@ -13,6 +13,8 @@
 #import "Comment.h"
 
 @interface ImagesTableViewController ()
+- (NSArray *) items;
+
 @end
 
 @implementation ImagesTableViewController
@@ -40,7 +42,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Media *item = [Datasource sharedInstance].mediaItems[indexPath.row];
+    Media *item = [self items][indexPath.row];
     UIImage *image = item.image;
     
     return image.size.height / image.size.width * CGRectGetWidth(self.view.frame);
@@ -49,7 +51,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [Datasource sharedInstance].mediaItems.count;
+    return [self items].count;
 }
 
 
@@ -78,12 +80,17 @@
         [cell.contentView addSubview:imageView];
     }
     
-    Media *item = [Datasource sharedInstance].mediaItems[indexPath.row];
+//    Media *item = [Datasource sharedInstance].mediaItems[indexPath.row];
+    Media *item = [self items][indexPath.row];
     imageView.image = item.image;
     
     return cell;
 }
 
+- (NSArray *) items {
+    NSArray *items = [Datasource sharedInstance].mediaItems;
+    return items;
+}
 
 /*
 // Override to support conditional editing of the table view.
