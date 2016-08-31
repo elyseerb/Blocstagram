@@ -33,6 +33,9 @@
     
     [[Datasource sharedInstance] addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
+    
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
 }
 
@@ -118,6 +121,33 @@
         [[Datasource sharedInstance] deleteMediaItem:item];
     }
 }
+ 
+
+- (void) refreshControlDidFire:(UIRefreshControl *) sender {
+    [[Datasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) { 
+        [sender endRefreshing];
+    }];
+}
+
+
+- (void) infiniteScrollIfNecessary {
+    // #3
+    NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];
+    
+    if (bottomIndexPath && bottomIndexPath.row == [Datasource sharedInstance].mediaItems.count - 1) {
+        // The very last cell is on screen
+        [[Datasource sharedInstance] requestOldItemsWithCompletionHandler:nil];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+// #4
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self infiniteScrollIfNecessary];
+}
+
+
 
 /*
 // Override to support conditional editing of the table view.
