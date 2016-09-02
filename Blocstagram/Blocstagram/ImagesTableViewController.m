@@ -124,7 +124,7 @@
  
 
 - (void) refreshControlDidFire:(UIRefreshControl *) sender {
-    [[Datasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) { 
+    [[Datasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
         [sender endRefreshing];
     }];
 }
