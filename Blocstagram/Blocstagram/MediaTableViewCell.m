@@ -85,14 +85,15 @@ static NSParagraphStyle *paragraphStyle;
     
     // #4
     NSRange usernameRange = [baseString rangeOfString:self.mediaItem.user.userName];
+    NSRange captionRange = [baseString rangeOfString:self.mediaItem.caption];
     [mutableUsernameAndCaptionString addAttribute:NSFontAttributeName value:[boldFont fontWithSize:usernameFontSize] range:usernameRange];
     [mutableUsernameAndCaptionString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
     
     // #5 Change kerning of the image caption
-    CGFloat otherNum = 20;
-    CFNumberRef otherCFNum = CFNumberCreate(NULL, kCFNumberCGFloatType, &otherNum);
+    
+    NSNumber *kerningSpacing = [NSNumber numberWithFloat:-1];
     //CFAttributedStringSetAttribute(attrString, CFRangeMake(0,18), kCTKernAttributeName, otherCFNum);
-
+    [mutableUsernameAndCaptionString addAttribute:NSKernAttributeName value:kerningSpacing range:captionRange];
     
     return  mutableUsernameAndCaptionString;
 }
@@ -104,18 +105,26 @@ static NSParagraphStyle *paragraphStyle;
         NSUInteger index = [self.mediaItem.comments indexOfObject:comment];
 
         //Make a string that says "username comment" followed by a line break
-        NSString *baseString = [NSString stringWithFormat:@"%@ %@/n", comment.from.userName, comment.text];
+        NSString *baseString = [NSString stringWithFormat:@"%@ %@\n", comment.from.userName, comment.text];
         
         // Make an attributed string, with the "username" bold
         
         NSMutableAttributedString *oneCommentString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : lightFont, NSParagraphStyleAttributeName : paragraphStyle}];
         NSRange usernameRange = [baseString rangeOfString:comment.from.userName];
+        NSRange commentRange = [baseString rangeOfString:comment.text];
+
         [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
         [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
+        NSMutableParagraphStyle *rightAlignedCommentStyle = [[NSMutableParagraphStyle alloc] init];
+        rightAlignedCommentStyle.alignment = NSTextAlignmentRight;
+        
+        if (index % 2) {
+            //Every other comment right aligned
+            [oneCommentString addAttribute:NSParagraphStyleAttributeName value:rightAlignedCommentStyle range:NSMakeRange(0,baseString.length)];
+        }
         
         if (index == 0) {
-            // First comment only
-            NSRange commentRange = [baseString rangeOfString:comment.text];
+            // First comment highlighted only
             [oneCommentString addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:commentRange];
         }
         
