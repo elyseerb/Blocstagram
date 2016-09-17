@@ -82,7 +82,7 @@ static NSParagraphStyle *paragraphStyle;
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]" options:kNilOptions metrics:nil views:viewDictionary]];
         
         
-        self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100];
+        self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:200];
         self.imageHeightConstraint.identifier = @"Image height constraint";
         
         
@@ -149,12 +149,14 @@ static NSParagraphStyle *paragraphStyle;
     CGSize usernameLabelSize = [self.usernameAndCaptionLabel sizeThatFits:maxSize];
     CGSize commentLabelSize = [self.commentLabel sizeThatFits:maxSize];
     
-    self.usernameAndCaptionLabelHeightConstraint.constant = usernameLabelSize.height == 0 ? 0 : usernameLabelSize.height + 20;
-    self.commentLabelHeightConstraint.constant = commentLabelSize.height == 0 ? 0 : commentLabelSize.height + 20;
+    
+    self.usernameAndCaptionLabelHeightConstraint.constant = (usernameLabelSize.height == 0 ? 0 : usernameLabelSize.height + 20);
+    self.commentLabelHeightConstraint.constant = (commentLabelSize.height == 0 ? 0 : commentLabelSize.height + 20);
+    
     if (self.mediaItem.image.size.width > 0 && CGRectGetWidth(self.contentView.bounds) > 0) {
-        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+        self.imageHeightConstraint.constant = (self.mediaItem.image.size.height / self.mediaItem.image.size.width) * CGRectGetWidth(self.contentView.bounds);
     } else {
-        self.imageHeightConstraint.constant = 0;
+        self.imageHeightConstraint.constant = 100;
     }
     
     //Hide the line between cells
@@ -176,8 +178,8 @@ static NSParagraphStyle *paragraphStyle;
     
     [layoutCell setNeedsLayout];
     [layoutCell layoutIfNeeded];
-    
-    return CGRectGetMaxY(layoutCell.commentLabel.frame);
+    CGFloat heightToReturn = CGRectGetMaxY(layoutCell.commentLabel.frame);
+    return heightToReturn;
 }
 
 @end
